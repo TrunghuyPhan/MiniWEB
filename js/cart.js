@@ -42,6 +42,8 @@ $(document).ready(function()
 	initSearch();
 	initMenu();
 	initQuantity();
+	initCart();
+	initClear();
 
 	/* 
 
@@ -208,6 +210,92 @@ $(document).ready(function()
 				}
 			});
 		}
+	}
+	function initClear(){
+		$("#clear_cart").on('click', function(){
+			$.removeCookie('amount');
+			$.removeCookie('arrCart');
+			alert("Xoa San pham ra khoi gio hang thanh cong ");
+		});
+		$("#btn_checkout").on('click', function(){
+			$.removeCookie('amount');
+			$.removeCookie('arrCart');
+			alert("Thanh Toan Thanh Cong");
+		});
+	}
+
+	function initCart()
+	{	
+		
+		var total = 0
+		var subTotal = 0;
+		var ship = 0;
+		var x = 1;
+		if(typeof($.cookie("amount") !== "undefined")){
+			$('#amount').text($.cookie("amount"));
+		}
+		$('input:radio').change(function(){
+			
+			ship = parseInt(this.value);
+			console.log(ship);
+			total = [ship+subTotal];
+			console.log(total);
+			$("#total").text(total+",000 VND");
+		}); 
+		
+		if(typeof($.cookie("arrCart")) !== 'undefined'){
+
+			$("#items").remove();
+			var items = JSON.parse($.cookie("arrCart"));
+			console.log(items)
+			items.forEach(e => {
+				subTotal += parseInt(e.pPrice) * e.pQuan;
+				x++;
+				console.log(subTotal);
+				var eleName = `<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
+			<div class="cart_item_image">
+				<div><img cl='img${x}' class="details_image_url" src="images/xsm1.jpg" alt=""></div>
+			</div>
+			<div class="cart_item_name_container">
+				<div class="cart_item_name"><a id="details_name" cl="name${x}" href="#">iPhone 11 Pro </a></div>
+				
+			</div>
+		</div>`;
+			var elePrice = `<div id="details_price" cl="price${x}" class="cart_item_price">30.990.000₫</div>`;
+			var eleQuan =`<div class="cart_item_quantity">
+			<div class="product_quantity_container">
+				<div class="product_quantity clearfix">
+					<span>Qty</span>
+					<input id="quantity_input" type="text" cl="quan${x}" pattern="[0-9]*" value="1">
+					<div class="quantity_buttons">
+						<div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up" aria-hidden="true"></i></div>
+						<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+		</div>`;
+
+				$("#item-col").append(`<div id='items${x}' class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start"></div<`);
+				$("#items"+x).append(eleName);
+				$("#items"+x).append(elePrice);
+				$("#items"+x).append(eleQuan);
+				$("img[cl='img"+x+"']").attr("src", e.pImg);
+				$("a[cl='name"+x+"']").text(e.pName);
+				$("div[cl='price"+x+"']").text(e.pPrice);
+				$("input[cl='quan"+x+"']").val(e.pQuan);
+				
+			});
+				//$("details_image_url").attr("src","")
+			$("#sub_total").text(subTotal+",000 VND");
+			
+			var total = ship + subTotal;
+			$("#total").text(total+",000 VND");
+		}
+		else{
+			$("#item-col").remove();
+			$("#card_items").append("<p style='text-align:center'>Gio Hang Trong rong,</p>")
+		}
+
 	}
 
 });

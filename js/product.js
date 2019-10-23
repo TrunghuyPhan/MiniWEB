@@ -24,7 +24,7 @@ $(document).ready(function()
 	1. Vars and Inits
 
 	*/
-
+	var arr = [];
 	var header = $('.header');
 	var hambActive = false;
 	var menuActive = false;
@@ -40,13 +40,14 @@ $(document).ready(function()
 	{
 		setHeader();
 	});
-
 	initSearch();
 	initMenu();
 	initImage();
 	initQuantity();
 	initIsotope();
+	initAddToCart();
 
+	
 	/* 
 
 	2. Set Header
@@ -206,7 +207,7 @@ $(document).ready(function()
 	6. Init Quantity
 
 	*/
-
+	var count = 1;
 	function initQuantity()
 	{
 		// Handle product quantity input
@@ -224,6 +225,7 @@ $(document).ready(function()
 				originalVal = input.val();
 				endVal = parseFloat(originalVal) + 1;
 				input.val(endVal);
+				count = input.val(endVal);
 			});
 
 			decButton.on('click', function()
@@ -234,7 +236,10 @@ $(document).ready(function()
 					endVal = parseFloat(originalVal) - 1;
 					input.val(endVal);
 				}
+				count = input.val(endVal);
+			
 			});
+			
 		}
 	}
 
@@ -282,5 +287,77 @@ $(document).ready(function()
 	        });
 		}
 	}
+
+	
+	
+
+	function initAddToCart()
+	{
+		if(typeof($.cookie("amount") !== "undefined")){
+			$('#amount').text($.cookie("amount"));
+		}
+		var pName = $(".details_name");
+		var pPrice = $(".details_price");
+		var pImg = $(".details_image_url");
+		var pQuan;
+	
+		var addCart = $("#btn_card");
+		
+		addCart.on('click', function(){
+			if(count === 1){
+				pQuan = 1;
+			}
+			else{
+				pQuan = parseInt(count.val());
+			}
+			var item = parseInt($("#amount").text());
+			var arrCart = [];
+			var arrCarte = [];
+			if(typeof($.cookie("arrCart")) === 'undefined'){
+				
+				$.cookie("arrCart", JSON.stringify(arrCarte));
+			}
+			
+				var objPhone = {
+					pName: pName.text(),
+					pPrice: pPrice.text(),
+					pImg: pImg.attr("src"),
+					pQuan: pQuan
+				}; 
+				arrCarte = JSON.parse($.cookie("arrCart"));
+				arrCarte.push(objPhone);
+				console.log(objPhone);
+				console.log("objPhone");
+				arrCart = JSON.parse($.cookie("arrCart"));
+				var checkItem = arrCart.find(function(e){
+					return e.pName === pName.text();
+				});
+				if(typeof(checkItem) !== "undefined"){
+					alert("This item is already in your cart!");
+					return;
+				}
+
+				$.cookie("arrCart", JSON.stringify(arrCarte));
+				if(item === 0){
+					console.log("hackonehit");
+					$.cookie("amount","1");
+				
+				}
+				else {
+					var x = parseInt($.cookie("amount")) + 1;
+					$.cookie("amount",x);
+					console.log(x);
+				}
+				$('#amount').text($.cookie("amount"));
+				alert("ADDED successful");
+				//var x = "hack";
+			
+			
+		});
+		
+	}
+	
+	
+
 
 });
