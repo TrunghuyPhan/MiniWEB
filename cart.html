@@ -68,7 +68,7 @@
 													c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 											</g>
 										</svg>
-										<div>Giỏ hàng <span>(0)</span></div>
+										<div>Giỏ hàng <span id="amount">0</span></div>
 									</a>
 								</div>
 								<div class="search">
@@ -207,23 +207,23 @@
 					</div>
 				</div>
 			</div>
-			<div class="row cart_items_row">
-				<div class="col">
+			<div id="card_items" class="row cart_items_row">
+				<div id="item-col" class="col">
 
 					<!-- Cart Item -->
-					<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+					<div id="items" class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
 						<!-- Name -->
 						<div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
 							<div class="cart_item_image">
-								<div><img src="images/cart_1.jpg" alt=""></div>
+								<div><img class="details_image_url" src="images/cart_1.jpg" alt=""></div>
 							</div>
 							<div class="cart_item_name_container">
-								<div class="cart_item_name"><a href="#">Smart Phone Deluxe Edition</a></div>
-								<div class="cart_item_edit"><a href="#">Edit Product</a></div>
+								<div class="cart_item_name"><a id="details_name" href="#">Smart Phone Deluxe Edition</a></div>
+								
 							</div>
 						</div>
 						<!-- Price -->
-						<div class="cart_item_price">$790.90</div>
+						<div id="details_price" class="cart_item_price">$790.90</div>
 						<!-- Quantity -->
 						<div class="cart_item_quantity">
 							<div class="product_quantity_container">
@@ -248,8 +248,8 @@
 					<div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
 						<div class="button continue_shopping_button"><a href="index.html">Tiếp tục mua hàng</a></div>
 						<div class="cart_buttons_right ml-lg-auto">
-							<div class="button clear_cart_button"><a href="#">Clear cart</a></div>
-							<div class="button update_cart_button"><a href="#">Update cart</a></div>
+							<div class="button clear_cart_button"><a id="clear_cart" href="#">Clear cart</a></div>
+			
 						</div>
 					</div>
 				</div>
@@ -263,17 +263,17 @@
 						<div class="section_subtitle">Select the one you want</div>
 						<div class="delivery_options">
 							<label class="delivery_option clearfix">Next day delivery
-								<input type="radio" name="radio">
+								<input type="radio" value="30" name="radio">
 								<span class="checkmark"></span>
-								<span class="delivery_price">$4.99</span>
+								<span class="delivery_price">30000 VND</span>
 							</label>
 							<label class="delivery_option clearfix">Standard delivery
-								<input type="radio" name="radio">
+								<input type="radio" value="10" name="radio">
 								<span class="checkmark"></span>
-								<span class="delivery_price">$1.99</span>
+								<span class="delivery_price">10000 VND</span>
 							</label>
 							<label class="delivery_option clearfix">Personal pickup
-								<input type="radio" checked="checked" name="radio">
+								<input type="radio" value="0" checked="checked" name="radio">
 								<span class="checkmark"></span>
 								<span class="delivery_price">Free</span>
 							</label>
@@ -301,7 +301,7 @@
 							<ul>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Subtotal</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div id="sub_total" class="cart_total_value ml-auto">$790.90</div>
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Shipping</div>
@@ -309,11 +309,11 @@
 								</li>
 								<li class="d-flex flex-row align-items-center justify-content-start">
 									<div class="cart_total_title">Total</div>
-									<div class="cart_total_value ml-auto">$790.90</div>
+									<div id="total" class="cart_total_value ml-auto">$790.90</div>
 								</li>
 							</ul>
 						</div>
-						<div class="button checkout_button"><a href="#">Proceed to checkout</a></div>
+						<div id="btn_checkout" class="button checkout_button"><a href="#">Proceed to checkout</a></div>
 					</div>
 				</div>
 			</div>
@@ -358,6 +358,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="plugins/greensock/ScrollToPlugin.min.js"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/cart.js"></script>
 </body>
 </html>

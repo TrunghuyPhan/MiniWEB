@@ -70,7 +70,7 @@
 														c0,7.5,6,13.5,13.5,13.5s13.5-6,13.5-13.5v-41h45.2l26.9,302.3C412.8,445.2,392.1,462,366.8,462z"/>
 												</g>
 											</svg>
-											<div>Giỏ hàng <span>(0)</span></div>
+											<div>Giỏ hàng <span id="amount">0</span></div>
 										</a>
 									</div>
 									<div class="search">
@@ -195,7 +195,7 @@
 						<div class="details_image_large"><img src="images/msiphone11pm.jpg" alt=""></div>
 						<div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
 							<div class="details_image_thumbnail active" data-image="images/cmrip11.jpg"><img src="images/cmrip11.jpg" alt=""></div>
-							<div class="details_image_thumbnail" data-image="images/11.png"><img src="images/11.png" alt=""></div>
+							<div class="details_image_thumbnail" data-image="images/11.png"><img class="details_image_url" src="images/11.png" alt=""></div>
 							<div class="details_image_thumbnail" data-image="images/vien11.jpg"><img src="images/vien11.jpg" alt=""></div>
 							<div class="details_image_thumbnail" data-image="images/ca11.png"><img src="images/ca11.png" alt=""></div>
 						</div>
@@ -228,7 +228,7 @@
 									<div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down" aria-hidden="true"></i></div>
 								</div>
 							</div>
-							<div class="button cart_button"><a href="#">Thêm vào giỏ</a></div>
+							<div id="btn_card" class="button cart_button"><a href="#">Thêm vào giỏ</a></div>
 						</div>
 
 						
@@ -341,6 +341,7 @@
 <script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
 <script src="js/product.js"></script>
 </body>
 </html>
